@@ -1,6 +1,8 @@
 package com.springboot.hello.controller;
 
 import com.springboot.hello.domain.dto.MemberDto;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -13,7 +15,7 @@ public class PostController {
         return "Hello Post API";
     }
 
-    @PostMapping(value = "/member1")
+    @PostMapping("/member1")
     // request body를 사용함
     public String postMember1(@RequestBody Map<String, Object> postData){
         StringBuilder sb = new StringBuilder();
@@ -28,5 +30,10 @@ public class PostController {
     @PostMapping(value = "/member2")
     public String postMember2(@RequestBody MemberDto memberDto){
         return memberDto.toString();
+    }
+
+    public ResponseEntity<MemberDto> postMember3(@RequestBody MemberDto memberDto){
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(memberDto);
+
     }
 }
