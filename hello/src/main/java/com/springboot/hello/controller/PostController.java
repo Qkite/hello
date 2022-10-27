@@ -32,8 +32,7 @@ public class PostController {
         return memberDto.toString();
     }
 
-    public ResponseEntity<MemberDto> postMember3(@RequestBody MemberDto memberDto){
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(memberDto);
 
-    }
+
+
 }
