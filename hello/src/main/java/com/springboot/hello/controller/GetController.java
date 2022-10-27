@@ -7,7 +7,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/get-api")
-public class HelloController {
+public class GetController {
 
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
     public String hello(){
@@ -51,7 +51,8 @@ public class HelloController {
     @GetMapping(value = "/request3")
     public String getRequestParam3(MemberDto memberDto){
         System.out.println(memberDto);
-        return "request3 호출 완료";
+        // return "request3 호출 완료";
+        return memberDto.toString();
     }
 
 
