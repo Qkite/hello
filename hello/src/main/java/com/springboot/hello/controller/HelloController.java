@@ -2,6 +2,8 @@ package com.springboot.hello.controller;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/v1/get-api")
 public class HelloController {
@@ -30,8 +32,19 @@ public class HelloController {
 
 
     @GetMapping(value = "/request1")
-    public String getVariable2(@RequestParam String name, @RequestParam String email, @RequestParam String organization){
+    public String getParam1(@RequestParam String name, @RequestParam String email, @RequestParam String organization){
         return String.format("%s %s %s", name, email, organization);
+    }
+
+    @GetMapping(value = "/request2")
+    public String getParam2(@RequestParam Map<String, String> param){
+        param.entrySet().forEach(map -> {
+            System.out.printf("key:%s value:%s\n", map.getKey(), map.getValue());
+        } );
+
+        return "request2가 호출 완료 되었습니다";
+        // Java8의 Stream 형식
+        //(mpa -> {}) 이 부분이 메소드의 형식이라고 생각하면 됨
     }
 
 
