@@ -10,12 +10,12 @@ public class HelloApplication {
 		SpringApplication.run(HelloApplication.class, args);
 		// nullpointerexception 발생 -> application.yml에 설정 변경하기
 //		server:
-//		port: 8081
+//		 port: 8081
 //
 //		spring:
-//		mvc:
-//		pathmatch:
-//		matching-strategy: ant_path_matcher
+//		 mvc:
+//		  pathmatch:
+//		   matching-strategy: ant_path_matcher
 	}
 
 }
