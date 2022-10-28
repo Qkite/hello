@@ -29,7 +29,7 @@ public class UserController {
 
 
     @DeleteMapping(value = "/user/{id}")
-    public String delete(@RequestParam String id){
+    public String delete(@PathVariable String id){
         userDao.deleteById(id);
         return "id가 " + id + "인 데이터가 삭제되었습니다.";
     }
