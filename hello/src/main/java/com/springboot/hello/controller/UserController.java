@@ -2,12 +2,10 @@ package com.springboot.hello.controller;
 
 import com.springboot.hello.dao.UserDao;
 import com.springboot.hello.domain.User;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/api/userdao")
 public class UserController {
 
     private final UserDao userDao;
