@@ -1,6 +1,8 @@
 package com.springboot.hello.controller;
 
 import com.springboot.hello.domain.dto.MemberDto;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -31,10 +33,11 @@ public class GetController {
     // 맞추기 어려울 때 @PathVariable에 파라미터의 이름을 적으면 됩니다
 
 
-
     @GetMapping(value = "/request1")
-    public String getRequestParam1(@RequestParam String name, @RequestParam String email, @RequestParam String organization){
-        return String.format("%s %s %s", name, email, organization);
+    public void getRequestParam1(@RequestParam String name, @RequestParam String email, @RequestParam String organization){
+        System.out.println(String.format("%s %s %s", name, email, organization));
+
+        //return ;
     }
 
     @GetMapping(value = "/request2")
@@ -54,6 +57,13 @@ public class GetController {
         // return "request3 호출 완료";
         return memberDto.toString();
     }
+
+//    @ApiOperation(value = "Get 메서드 예제", notes = "@RequestParam을 활용한 GET Method")
+//    @GetMapping(value = "request1")
+//    public String getRequestParam(
+//            @ApiParam(value="이름", required = true) @RequestParam String name,
+//
+//    );
 
 
 }
