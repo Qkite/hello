@@ -4,6 +4,8 @@ import com.springboot.hello.dao.UserDao;
 import com.springboot.hello.domain.User;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/userdao")
 public class UserController {
@@ -40,5 +42,12 @@ public class UserController {
         return "데이터가 전부 삭제되었습니다.";
     }
 
-
+    @GetMapping(value = "/user")
+    public String get(){
+        List<User> usersList = userDao.select();
+        for (User user:usersList) {
+            return user.getId() + user.getName() + user.getPassword();
+        }
+        return null;
+    }
 }
