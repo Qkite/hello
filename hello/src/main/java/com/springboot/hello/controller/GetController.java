@@ -1,8 +1,6 @@
 package com.springboot.hello.controller;
 
-import com.springboot.hello.domain.dto.MemberDto;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import com.springboot.hello.domain.MemberDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 

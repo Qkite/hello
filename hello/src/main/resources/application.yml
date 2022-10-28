@@ -1,7 +1,18 @@
 server:
   port: 8081
 
+logging:
+  level:
+    root: info
+
+
 spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:8080/likelion-db
+    username: root
+    password: 123456
