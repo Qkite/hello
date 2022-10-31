@@ -28,7 +28,6 @@ public class SwaggerConfiguration {
                 .description("설명 부분")
                 .version("1.0.0")
                 .build();
-
     }
 
 }
