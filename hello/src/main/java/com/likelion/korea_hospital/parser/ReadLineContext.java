@@ -28,7 +28,7 @@ public class ReadLineContext<T> {
             try {
                 result.add(parser.parse(str));
             } catch (Exception e) {
-                System.out.printf("파싱중 문제가 생겨 해당 줄을 넘어갑니다. %s \n", str);
+                System.out.printf("파싱중 문제가 생겨 해당 줄을 넘어갑니다. %s \n", str.substring(0,10));
             }
         }
         reader.close();
