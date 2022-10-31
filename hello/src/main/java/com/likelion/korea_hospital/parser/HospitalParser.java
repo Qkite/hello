@@ -35,8 +35,8 @@ public class HospitalParser implements Parser<Hospital> {
         hospital.setOpenLocalGovernmentCode(Integer.parseInt(row[3]));
         hospital.setManagementNumber(row[4]);
         hospital.setLicenseDate(LocalDateTime.of(Integer.parseInt(row[5].substring(0,4)), Integer.parseInt(row[5].substring(4,6)), Integer.parseInt(row[5].substring(6,8)), 0,0,0));
-        hospital.setManagementNumber(row[7]);
-        hospital.setManagementNumber(row[9]);
+        hospital.setBusinessStatus(Integer.parseInt(row[7]));
+        hospital.setBusinessStatusCode(Integer.parseInt(row[9]));
         hospital.setPhone(row[15]);
         hospital.setFullAddress(row[18]);
         hospital.setRoadNameAddress(row[19]);
