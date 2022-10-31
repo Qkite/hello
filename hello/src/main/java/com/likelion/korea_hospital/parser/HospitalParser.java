@@ -2,10 +2,15 @@ package com.likelion.korea_hospital.parser;
 
 import com.likelion.korea_hospital.domain.Hospital;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.List;
 
 public class HospitalParser implements Parser<Hospital> {
+
+    public HospitalParser() throws IOException {
+    }
 
     @Override
     public Hospital parse(String str) {
@@ -47,7 +52,8 @@ public class HospitalParser implements Parser<Hospital> {
         hospital.setTotalNumberOfBeds(Integer.parseInt(row[31]));
         hospital.setTotalAreaSize(Float.parseFloat(row[32].replace("\"", "")));
 
-
         return hospital;
     }
+
+
 }

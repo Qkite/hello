@@ -33,5 +33,4 @@ public class Hospital {
     private int totalNumberOfBeds;
     private float totalAreaSize;
 
-
 }
