@@ -84,13 +84,22 @@ class HospitalParserTest {
 
     @Test
     @DisplayName("Hospital이 insert가 잘 되는지")
-    void addAndGet() throws IOException {
+    void addAndGetAndFindById() throws IOException {
 
         HospitalParser hp = new HospitalParser();
         Hospital hospital = hp.parse(line1);
         hospitalDao.add(hospital);
         assertEquals(hospitalDao.getCount(), 1);
+        assertEquals(hospitalDao.findById(1).getHospitalName(), "효치과의원");
+    }
 
+    @Test
+    @DisplayName("데이터 베이스에서 데이터가 잘 제거되는지")
+
+    void deleteAndGet(){
+
+        hospitalDao.deleteAll();
+        assertEquals(hospitalDao.getCount(), 0);
     }
 
 

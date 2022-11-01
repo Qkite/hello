@@ -1,9 +1,14 @@
 package com.likelion.korea_hospital.dao;
 
 import com.likelion.korea_hospital.domain.Hospital;
+import com.likelion.korea_hospital.parser.HospitalParser;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 @Component
 public class HospitalDao {
@@ -29,6 +34,23 @@ public class HospitalDao {
     public int getCount(){
         String sql = "select count(id) from nation_wide_hospitals";
         return this.jdbcTemplate.queryForObject(sql, Integer.class);
+
+    }
+
+    public void deleteAll(){
+        String sql = "delete from nation_wide_hospitals";
+        this.jdbcTemplate.update(sql);
+    }
+
+
+    public Hospital findById(int id){
+        RowMapper<Hospital> rowMapper = (rs, rowNum) -> {
+            Hospital hospital = new Hospital();
+            hospital.setId(rs.getInt("id"));
+            hospital.setHospitalName(rs.getString("hospital_name"));
+            return hospital;
+        };
+        return this.jdbcTemplate.queryForObject("select * from nation_wide_hospitals where id = ?", rowMapper,id);
 
     }
 }
