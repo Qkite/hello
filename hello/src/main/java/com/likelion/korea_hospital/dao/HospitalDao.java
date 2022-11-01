@@ -3,7 +3,9 @@ package com.likelion.korea_hospital.dao;
 import com.likelion.korea_hospital.domain.Hospital;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
+@Service
 @Component
 public class HospitalDao {
 

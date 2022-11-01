@@ -1,6 +1,5 @@
 package com.likelion.korea_hospital.domain;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-@AllArgsConstructor
+
 @Getter
 @Setter
 @NoArgsConstructor
