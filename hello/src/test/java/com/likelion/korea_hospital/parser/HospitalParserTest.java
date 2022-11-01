@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 // Spring Boot가 스캔을 해서 등록한 Bean을 Test에서 쓸 수 있게 함
 // 테스트파일이 likelion.korea_hospital.parser의 하위에 존재하지 않아서 factory의 클래스를 지정해주어서 사용할 수 있다.
-@SpringBootTest(classes = {ParserFactory.class, HospitalDao.class})
+@SpringBootTest
 class HospitalParserTest {
 
     String line1 = "\"1\",\"의원\",\"01_01_02_P\",\"3620000\",\"PHMA119993620020041100004\",\"19990612\",\"\",\"01\",\"영업/정상\",\"13\",\"영업중\",\"\",\"\",\"\",\"\",\"062-515-2875\",\"\",\"500881\",\"광주광역시 북구 풍향동 565번지 4호 3층\",\"광주광역시 북구 동문대로 24, 3층 (풍향동)\",\"61205\",\"효치과의원\",\"20211115113642\",\"U\",\"2021-11-17 02:40:00.0\",\"치과의원\",\"192630.735112\",\"185314.617632\",\"치과의원\",\"1\",\"0\",\"0\",\"52.29\",\"401\",\"치과\",\"\",\"\",\"\",\"0\",\"0\",\"\",\"\",\"0\",\"\",";
@@ -84,11 +84,14 @@ class HospitalParserTest {
 
     @Test
     @DisplayName("Hospital이 insert가 잘 되는지")
-    void add() throws IOException {
+    void addAndGet() throws IOException {
 
         HospitalParser hp = new HospitalParser();
         Hospital hospital = hp.parse(line1);
         hospitalDao.add(hospital);
+        assertEquals(hospitalDao.getCount(), 1);
+
     }
+
 
 }
