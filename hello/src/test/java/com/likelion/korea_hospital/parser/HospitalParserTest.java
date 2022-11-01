@@ -91,6 +91,7 @@ class HospitalParserTest {
         hospitalDao.add(hospital);
         assertEquals(hospitalDao.getCount(), 1);
         assertEquals(hospitalDao.findById(1).getHospitalName(), "효치과의원");
+        assertEquals(hospitalDao.findById(1).getLicenseDate(), LocalDateTime.of(1999, 6, 12, 0, 0, 0));
     }
 
     @Test
