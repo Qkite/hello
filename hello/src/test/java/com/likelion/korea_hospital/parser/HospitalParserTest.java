@@ -2,8 +2,10 @@ package com.likelion.korea_hospital.parser;
 
 import com.likelion.korea_hospital.dao.HospitalDao;
 import com.likelion.korea_hospital.domain.Hospital;
+import com.likelion.korea_hospital.service.HospitalService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -33,25 +35,30 @@ class HospitalParserTest {
     // Spring Boot의 @ComponentScan이 @Component annotation이 달린 클래스를 전부 Bean으로 등록함
     // Factory를 만들어 @Bean을 등록하지 않아도 Autowired 가능하다
 
-
+    @Autowired
+    HospitalService hospitalService;
 
 
     @Test
+    @Order(5)
     @DisplayName("10만건 이상이 잘 등록되었는지 확인")
     void name() throws IOException {
-        HospitalParser hospitalParser = new HospitalParser();
-        ReadLineContext<Hospital> readLineContext = new ReadLineContext<>(new HospitalParser());
-        List<Hospital> hospitalList= readLineContext.readByLine("C:\\Users\\yeonji\\Desktop\\fulldata_01_01_02_P_의원_utf_8.csv");
-        // 파일을 utf-8로 변환하여 돌리기
-        assertTrue(hospitalList.size()>100000);
+
+        hospitalDao.deleteAll();
+        String filename="C:\\Users\\yeonji\\Desktop\\fulldata_01_01_02_P_의원_utf_8.csv";
+        int cnt = this.hospitalService.insertLargeVolumeHospitalDate(filename);
+        assertTrue(cnt>1000);
+        assertTrue(cnt > 10000);
+        System.out.printf("파싱된 데이터 개수: %d", cnt);
     }
 
 
     @Test
+    @Order(3)
     @DisplayName("csv 1줄은 Hospital로 잘 만드는지 TEST")
     void convertToHospital() throws IOException {
 
-
+        hospitalDao.deleteAll();
         HospitalParser hp = new HospitalParser();
         Hospital hospital = hp.parse(line1);
 
@@ -75,6 +82,7 @@ class HospitalParserTest {
 
 
     @Test
+    @Order(1)
     @DisplayName("factory가 잘 돌아가는지 확인하기")
     void withFactory() throws IOException {
 
@@ -83,6 +91,7 @@ class HospitalParserTest {
     }
 
     @Test
+    @Order(2)
     @DisplayName("Hospital이 insert가 잘 되는지")
     void addAndGetAndFindById() throws IOException {
 
@@ -95,6 +104,7 @@ class HospitalParserTest {
     }
 
     @Test
+    @Order(4)
     @DisplayName("데이터 베이스에서 데이터가 잘 제거되는지")
 
     void deleteAndGet(){
