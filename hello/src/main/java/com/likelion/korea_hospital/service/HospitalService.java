@@ -25,28 +25,25 @@ public class HospitalService {
     }
 
     // 파일명에 대한 의존성을 줄이기 위해
-    @Transactional
-    public int insertLargeVolumeHospitalDate(String filename){
+    public int insertLargeVolumeHospitalData(String filename) {
         int cnt = 0;
-
         try {
-            List<Hospital> hospitalList= hospitalReadLineContext.readByLine(filename);
-
-            for (Hospital hospital:hospitalList) {
+            List<Hospital> hospitalList = hospitalReadLineContext.readByLine(filename);
+            System.out.println("파싱이 끝났습니다.");
+            for (Hospital hospital : hospitalList) { // loop구간
                 try {
-                    this.hospitalDao.add(hospital);
+                    this.hospitalDao.add(hospital); // db에 insert하는 구간
                     cnt++;
                 } catch (Exception e) {
-                    System.out.printf("id: %d 레코드에 문제가 있습니다.", hospital.getId());
+                    System.out.printf("id:%d 레코드에 문제가 있습니다.",hospital.getId());
                     throw new RuntimeException(e);
                 }
             }
         } catch (IOException e) {
-
             throw new RuntimeException(e);
         }
-
         return cnt;
     }
+
 
 }

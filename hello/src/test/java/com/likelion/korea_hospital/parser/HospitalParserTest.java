@@ -39,79 +39,68 @@ class HospitalParserTest {
     HospitalService hospitalService;
 
 
-    @Test
-    @Order(5)
-    @DisplayName("10만건 이상이 잘 등록되었는지 확인")
-    void name() throws IOException {
-
-        hospitalDao.deleteAll();
-        String filename="C:\\Users\\yeonji\\Desktop\\fulldata_01_01_02_P_의원_utf_8.csv";
-        int cnt = this.hospitalService.insertLargeVolumeHospitalDate(filename);
-        assertTrue(cnt>1000);
-        assertTrue(cnt > 10000);
-        System.out.printf("파싱된 데이터 개수: %d", cnt);
-    }
-
-
-    @Test
-    @Order(3)
-    @DisplayName("csv 1줄은 Hospital로 잘 만드는지 TEST")
-    void convertToHospital() throws IOException {
-
-        hospitalDao.deleteAll();
-        HospitalParser hp = new HospitalParser();
-        Hospital hospital = hp.parse(line1);
-
-        assertEquals(1, hospital.getId());
-        assertEquals("의원", hospital.getOpenServiceName());
-        assertEquals(3620000,hospital.getOpenLocalGovernmentCode());
-        assertEquals("PHMA119993620020041100004",hospital.getManagementNumber());
-        assertEquals(LocalDateTime.of(1999, 6, 12, 0, 0, 0), hospital.getLicenseDate()); //19990612
-        assertEquals(1, hospital.getBusinessStatus());
-        assertEquals(13, hospital.getBusinessStatusCode());
-        assertEquals("062-515-2875", hospital.getPhone());
-        assertEquals("광주광역시 북구 풍향동 565번지 4호 3층", hospital.getFullAddress());
-        assertEquals("광주광역시 북구 동문대로 24, 3층 (풍향동)", hospital.getRoadNameAddress());
-        assertEquals("효치과의원", hospital.getHospitalName());
-        assertEquals("치과의원", hospital.getBusinessTypeName());
-        assertEquals(1, hospital.getHealthcareProviderCount());
-        assertEquals(0, hospital.getPatientRoomCount());
-        assertEquals(0, hospital.getTotalNumberOfBeds());
-        assertEquals(52.29f, hospital.getTotalAreaSize());
-    }
-
-
-    @Test
-    @Order(1)
-    @DisplayName("factory가 잘 돌아가는지 확인하기")
-    void withFactory() throws IOException {
-
-        List<Hospital> hospitalList= hospitalReadLineContext.readByLine("C:\\Users\\yeonji\\Desktop\\fulldata_01_01_02_P_의원_utf_8.csv");
-        assertTrue(hospitalList.size()>100000);
-    }
-
-    @Test
-    @Order(2)
-    @DisplayName("Hospital이 insert가 잘 되는지")
-    void addAndGetAndFindById() throws IOException {
-
-        HospitalParser hp = new HospitalParser();
-        Hospital hospital = hp.parse(line1);
-        hospitalDao.add(hospital);
-        assertEquals(hospitalDao.getCount(), 1);
-        assertEquals(hospitalDao.findById(1).getHospitalName(), "효치과의원");
-        assertEquals(hospitalDao.findById(1).getLicenseDate(), LocalDateTime.of(1999, 6, 12, 0, 0, 0));
-    }
-
-    @Test
-    @Order(4)
-    @DisplayName("데이터 베이스에서 데이터가 잘 제거되는지")
-
-    void deleteAndGet(){
-
-        hospitalDao.deleteAll();
-        assertEquals(hospitalDao.getCount(), 0);
-    }
-
+//    @Test
+//    @DisplayName("factory가 잘 돌아가는지 확인하기")
+//    void testA() throws IOException {
+//
+//        List<Hospital> hospitalList= hospitalReadLineContext.readByLine("C:\\Users\\yeonji\\Desktop\\fulldata_01_01_02_P_의원_utf_8.csv");
+//        assertTrue(hospitalList.size()>100000);
+//    }
+//
+//    @Test
+//    @DisplayName("Hospital이 insert가 잘 되는지")
+//    void testB() throws IOException {
+//
+//        HospitalParser hp = new HospitalParser();
+//        Hospital hospital = hp.parse(line1);
+//        hospitalDao.add(hospital);
+//        assertEquals(hospitalDao.getCount(), 1);
+//        assertEquals(hospitalDao.findById(1).getHospitalName(), "효치과의원");
+//        assertEquals(hospitalDao.findById(1).getLicenseDate(), LocalDateTime.of(1999, 6, 12, 0, 0, 0));
+//    }
+//
+//    @Test
+//    @DisplayName("csv 1줄은 Hospital로 잘 만드는지 TEST")
+//    void testC() throws IOException {
+//
+//
+//        HospitalParser hp = new HospitalParser();
+//        Hospital hospital = hp.parse(line1);
+//
+//        assertEquals(1, hospital.getId());
+//        assertEquals("의원", hospital.getOpenServiceName());
+//        assertEquals(3620000,hospital.getOpenLocalGovernmentCode());
+//        assertEquals("PHMA119993620020041100004",hospital.getManagementNumber());
+//        assertEquals(LocalDateTime.of(1999, 6, 12, 0, 0, 0), hospital.getLicenseDate()); //19990612
+//        assertEquals(1, hospital.getBusinessStatus());
+//        assertEquals(13, hospital.getBusinessStatusCode());
+//        assertEquals("062-515-2875", hospital.getPhone());
+//        assertEquals("광주광역시 북구 풍향동 565번지 4호 3층", hospital.getFullAddress());
+//        assertEquals("광주광역시 북구 동문대로 24, 3층 (풍향동)", hospital.getRoadNameAddress());
+//        assertEquals("효치과의원", hospital.getHospitalName());
+//        assertEquals("치과의원", hospital.getBusinessTypeName());
+//        assertEquals(1, hospital.getHealthcareProviderCount());
+//        assertEquals(0, hospital.getPatientRoomCount());
+//        assertEquals(0, hospital.getTotalNumberOfBeds());
+//        assertEquals(52.29f, hospital.getTotalAreaSize());
+//    }
+//
+//    @Test
+//    @DisplayName("데이터 베이스에서 데이터가 잘 제거되는지")
+//
+//    void testD(){
+//
+//        assertEquals(hospitalDao.getCount(), 0);
+//    }
+//
+//    @Test
+//    @DisplayName("10만건 이상이 잘 등록되었는지 확인")
+//    void testE() throws IOException {
+//        String filename="C:\\Users\\yeonji\\Desktop\\fulldata_01_01_02_P_의원_utf_8.csv";
+//        int cnt = this.hospitalService.insertLargeVolumeHospitalData(filename);
+//        assertTrue(cnt>1000);
+//        assertTrue(cnt > 10000);
+//        System.out.printf("파싱된 데이터 개수: %d", cnt);
+//    }
 
 }
