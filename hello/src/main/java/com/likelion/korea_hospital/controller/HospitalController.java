@@ -5,6 +5,8 @@ import com.likelion.korea_hospital.dao.HospitalDao;
 import com.likelion.korea_hospital.domain.Hospital;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/korea-hospital-data")
 public class HospitalController {
@@ -24,7 +26,9 @@ public class HospitalController {
 
         // add를 Hospital의 형태로 받으므로 body에 hospital의 variable의 이름을 넣어주어야 한다!!!
         // date를 변환해주어야 하는 문제
+
         hospitalDao.add(hospital);
+
         return "ID: " + hospital.getId() + " " + hospital.getHospitalName() + "의 정보가 입력되었습니다.";
     }
 
