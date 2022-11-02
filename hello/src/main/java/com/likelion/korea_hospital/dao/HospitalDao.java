@@ -42,6 +42,11 @@ public class HospitalDao {
         this.jdbcTemplate.update(sql);
     }
 
+    public void deleteById(int id){
+        String sql = "delete from nation_wide_hospitals where id = ?";
+        this.jdbcTemplate.update(sql, id);
+    }
+
 
     public Hospital findById(int id){
         RowMapper<Hospital> rowMapper = (rs, rowNum) -> {
