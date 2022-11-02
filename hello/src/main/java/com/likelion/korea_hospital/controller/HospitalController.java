@@ -41,6 +41,11 @@ public class HospitalController {
         return "모든 데이터가 삭제되었습니다.";
     }
 
+    @GetMapping(value = "/get-all")
+    public Hospital getAllData(){
+        return hospitalDao.findAll();
+    }
+
     @GetMapping(value = "/get/{id}")
     public String getDate(@PathVariable int id){
         Hospital findData = hospitalDao.findById(id);
